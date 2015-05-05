@@ -1,0 +1,6 @@
+{
+  "name": "moving-man",
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
