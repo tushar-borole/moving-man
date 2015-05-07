@@ -1,31 +1,36 @@
-;
 (function ($, window, document, undefined) {
     var elm = this;
     $.fn.walk = function () {
         this.css("position", "absolute");
-        this.boyWalking = $("#boyWalking")
-        this.boyStopped = $("#boyStopped")
-        this.walkingBoy = $(this)
+
         var appendDiv = '<div>' +
             '<img id="boyWalking" src="images/animBoy.gif"/>' +
             '<img id="boyStopped"" src="images/animBoyStopped.png"/>' +
-            '</div>'
-        this.append(appendDiv)
-        $("#boyWalking").css("display", "none")
-        $("#boyStopped").css("display", "block")
+            '</div>';
+        this.boyWalking = $("#boyWalking");
+        this.boyStopped = $("#boyStopped");
+        this.walkingBoy = $(this);
+        this.append(appendDiv);
+        $("#boyWalking").css("display", "none");
+        $("#boyStopped").css("display", "block");
     };
 
     var walkBoy = function () {
-        console.log("inn")
-        $("#boyWalking").css("display", "block")
-        $("#boyStopped").css("display", "none")
+        console.log(this.boyWalking);
+        $("#boyWalking").css("display", "block");
+        $("#boyStopped").css("display", "none");
     };
 
     var stopBoy = function () {
-        $("#boyWalking").css("display", "none")
-        $("#boyStopped").css("display", "block")
+        $("#boyWalking").css("display", "none");
+        $("#boyStopped").css("display", "block");
 
-    }
+    };
+    $.walk = {}
+    $.walk.defaults = {
+        duration: 1000
+    };
+    var option = $.extend({}, $.walk.defaults, option);
 
 
     var resetRotate = function () {
@@ -35,9 +40,9 @@
             '-webkit-transform': 'rotate(0deg)',
             /* Chrome, Safari, Opera */
             'transform': 'rotate(0deg)'
-        })
+        });
 
-    }
+    };
 
     var rotateY = function (rotate) {
         $("#walk").css({
@@ -46,9 +51,9 @@
             '-webkit-transform': 'rotateY(' + rotate + 'deg)',
             /* Chrome, Safari, Opera */
             'transform': 'rotateY(' + rotate + 'deg)'
-        })
+        });
 
-    }
+    };
     var rotateZ = function (rotate) {
         $("#walk").css({
             '-ms-transform': 'rotateZ(' + rotate + 'deg)',
@@ -56,66 +61,77 @@
             '-webkit-transform': 'rotateZ(' + rotate + 'deg)',
             /* Chrome, Safari, Opera */
             'transform': 'rotateZ(' + rotate + 'deg)'
-        })
+        });
 
-    }
+    };
 
+    var moveRightStatus = true;
     var moveRight = function () {
-        walkBoy()
-        resetRotate()
-        rotateY(0)
-        $("#walk").animate({
-            "left": "+=50px"
-        }, {
-            duration: 1000,
-            queue: false
-        })
-        setTimeout(function () {
-            stopBoy()
-        }, 1000)
+        if (moveRightStatus) {
+            moveRightStatus = false;
+            walkBoy();
+            resetRotate();
+            rotateY(0);
+            $("#walk").animate({
+                "left": "+=50px"
+            }, {
+                duration: 1000,
+                queue: false
+            });
+            setTimeout(function () {
+                stopBoy();
+                moveRightStatus = true;
+            }, 1000);
+        }
 
-
-
+        ;
     };
 
+    var moveLeftStatus = true;
     var moveLeft = function () {
-        walkBoy()
-        resetRotate()
-        rotateY(180)
-        $("#walk").animate({
-            "left": "-=50px"
-        }, "slow")
-        setTimeout(function () {
-            stopBoy()
-        }, 1000)
+        if (moveLeftStatus) {
+            walkBoy();
+            resetRotate();
+            rotateY(180);
+            $("#walk").animate({
+                "left": "-=50px"
+            }, "slow");
+            setTimeout(function () {
+                stopBoy();
+            }, 1000);
+        }
     };
 
-
+    var moveBottomStatus = true;
     var moveBottom = function () {
-        walkBoy()
-        resetRotate()
-        rotateZ(90)
-        $("#walk").animate({
-            "top": "+=50px"
-        }, "slow")
-        setTimeout(function () {
-            stopBoy()
-        }, 1000)
+        if (moveBottomStatus) {
+            walkBoy();
+            resetRotate();
+            rotateZ(90);
+            $("#walk").animate({
+                "top": "+=50px"
+            }, "slow");
+            setTimeout(function () {
+                stopBoy();
+            }, 1000);
+        };
 
     };
-
+    var moveTopStatus = true;
     var moveTop = function () {
-        walkBoy()
-        resetRotate()
-        rotateZ(265)
-        $("#walk").animate({
-            "top": "-=50px"
-        }, "slow")
-        setTimeout(function () {
-            stopBoy()
-        }, 1000)
+        if (moveTopStatus) {
+            walkBoy();
+            resetRotate();
+            rotateZ(265);
+            $("#walk").animate({
+                "top": "-=50px"
+            }, "slow");
+            setTimeout(function () {
+                stopBoy();
+            }, 1000);
+        }
 
-    }
+    };
 
 
     $(document).keydown(function (e) {
