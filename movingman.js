@@ -13,6 +13,7 @@
         this.append(appendDiv);
         $("#boyWalking").css("display", "none");
         $("#boyStopped").css("display", "block");
+        return this
     };
 
     var walkBoy = function () {
@@ -72,6 +73,7 @@
             walkBoy();
             resetRotate();
             rotateY(0);
+            $("#walk").stop();
             $("#walk").animate({
                 "left": "+=50px"
             }, {
@@ -93,6 +95,7 @@
             walkBoy();
             resetRotate();
             rotateY(180);
+             $("#walk").stop();
             $("#walk").animate({
                 "left": "-=50px"
             }, "slow");
@@ -108,6 +111,7 @@
             walkBoy();
             resetRotate();
             rotateZ(90);
+             $("#walk").stop();
             $("#walk").animate({
                 "top": "+=50px"
             }, "slow");
@@ -123,6 +127,7 @@
             walkBoy();
             resetRotate();
             rotateZ(265);
+             $("#walk").stop();
             $("#walk").animate({
                 "top": "-=50px"
             }, "slow");
